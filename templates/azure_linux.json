@@ -1,0 +1,17 @@
+{
+    "variables":{
+        "clientid":"{{env `ARM_CLIENT_ID`}}",
+        "clientsecret":"{{env `ARM_CLIENT_SECRET`}}",
+        "subscriptionid":"{{env `ARM_SUBSCRIPTION_ID`}}",
+        "tenantid":"{{env `ARM_TENANT_ID`}}",
+        "resource_group":"rg_images",
+        "image_name":"linuxWeb",
+        "image_version":"0.0.1"
+    },
+
+    "":[
+        {
+
+        }
+    ]
+}
