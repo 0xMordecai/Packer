@@ -35,8 +35,10 @@ data "azurerm_image" "customngnix" {
   resource_group_name = "rg_images"
 }
 
+
+
 resource "azurerm_linux_virtual_machine" "vm" {
-  name                = "mk1"
+  name                = "mk2"
   resource_group_name = azurerm_resource_group.p1-rg.name
   location            = azurerm_resource_group.p1-rg.location
   size                = "Standard_F2"
@@ -44,13 +46,17 @@ resource "azurerm_linux_virtual_machine" "vm" {
   network_interface_ids = [
     azurerm_network_interface.net-inter.id,
   ]
-
+   # SSH Key Authentication
   admin_ssh_key {
     username   = "adminuser"
-    public_key = file("~/.ssh/id_rsa.pub")
+    public_key = file("~/Downloads/testMk1_key.pem") # path to your public key
   }
+  
+  ## USE THE CUSTOM IMAGE
+  source_image_id = data.azurerm_image.customngnix
 
   os_disk {
+    name = "mk2-osdisk"
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
@@ -58,7 +64,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   source_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts"
+    sku       = "24.04-LTS"
     version   = "latest"
   }
 }
