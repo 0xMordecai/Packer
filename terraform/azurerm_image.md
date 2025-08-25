@@ -53,6 +53,3 @@ resource "azurerm_windows_virtual_machine" "example" {
   They are often used in conjunction with **Azure Compute Gallery** (formerly Shared Image Gallery) for centralized image management and distribution.
 * **`source_image_id` vs. `source_image_reference`**: You must choose **one or the other** within the virtual machine resource.
   You cannot use both simultaneously.
-
-```
-
