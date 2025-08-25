@@ -24,7 +24,9 @@ resource "azurerm_public_ip" "pip" {
   location = azurerm_resource_group.p2-rg.location
   resource_group_name = azurerm_resource_group.p2-rg.name
   allocation_method = "Static"
+  # Stock Keeping Unit(sku):-> It’s basically the pricing tier or performance level of a resource.
   sku = "Standard"
+  domain_name_label = "p2-devops-iac-terraform-packer" # must be globally unique
 
 }
 
@@ -34,13 +36,15 @@ resource "azurerm_network_interface" "net-inter" {
   resource_group_name = azurerm_resource_group.p2-rg.name
 
   ip_configuration {
-    name                          = "internal"
+    name                          = "p2-ipconfig"
     subnet_id                     = azurerm_subnet.sub-net.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = azurerm_public_ip.pip.id
   }
 }
-
+# ---------------------------------------
 ## GET THE CUSTOM IMAGE CREATED BY PACKER
+# ---------------------------------------
 data "azurerm_image" "customngnix" {
   name                = "linuxWebServer-0.0.1"
   resource_group_name = "rg_images"
@@ -82,3 +86,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
     version   = "latest"
   }
 }
+
+#---------------------------------------------------------
+#|  After terraform apply, run:                          |
+#|  ---->ssh admin@$(terraform output -raw vm_public_ip) |
+#---------------------------------------------------------
