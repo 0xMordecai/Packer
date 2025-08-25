@@ -29,6 +29,12 @@ resource "azurerm_network_interface" "net-inter" {
   }
 }
 
+## GET THE CUSTOM IMAGE CREATED BY PACKER
+data "azurerm_image" "customngnix" {
+  name                = "linuxWebServer-0.0.1"
+  resource_group_name = "rg_images"
+}
+
 resource "azurerm_linux_virtual_machine" "vm" {
   name                = "mk1"
   resource_group_name = azurerm_resource_group.p1-rg.name
