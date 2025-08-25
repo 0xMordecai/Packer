@@ -46,6 +46,9 @@ resource "azurerm_linux_virtual_machine" "vm" {
   network_interface_ids = [
     azurerm_network_interface.net-inter.id,
   ]
+   # Disable password Auth
+  disable_password_authentication = true
+
    # SSH Key Authentication
   admin_ssh_key {
     username   = "adminuser"
