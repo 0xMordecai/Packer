@@ -5,13 +5,18 @@
         "subscriptionid":"{{env `ARM_SUBSCRIPTION_ID`}}",
         "tenantid":"{{env `ARM_TENANT_ID`}}",
         "resource_group":"rg_images",
-        "image_name":"linuxWeb",
+        "image_name":"linuxWebServer",
         "image_version":"0.0.1"
     },
 
-    "":[
+    "builders":[
         {
+            "type":"azure-rm",
 
+            "client_id":"{{user `clientid`}}",
+            "client_secret":"{{user `clientsecret`}}",
+            "subscription_id":"{{user `subscriptionid`}}",
+            "tenant_id":"{{user `tenantid`}}"
         }
     ]
 }
