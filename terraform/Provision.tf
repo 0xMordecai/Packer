@@ -1,26 +1,26 @@
-resource "azurerm_resource_group" "p1-rg" {
-  name     = "project1-resource-group"
+resource "azurerm_resource_group" "p2-rg" {
+  name     = "project2-resource-group"
   location = "West Europe"
 }
 
-resource "azurerm_virtual_network" "p1-vnet" {
-  name                = "project1-virtual-network"
+resource "azurerm_virtual_network" "p2-vnet" {
+  name                = "project2-virtual-network"
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.p1-rg.location
-  resource_group_name = azurerm_resource_group.p1-rg.name
+  location            = azurerm_resource_group.p2-rg.location
+  resource_group_name = azurerm_resource_group.p2-rg.name
 }
 
 resource "azurerm_subnet" "sub-net" {
-  name                 = "internal"
-  resource_group_name  = azurerm_resource_group.p1-rg.name
-  virtual_network_name = azurerm_virtual_network.p1-vnet.name
+  name                 = "project2-subnet"
+  resource_group_name  = azurerm_resource_group.p2-rg.name
+  virtual_network_name = azurerm_virtual_network.p2-vnet.name
   address_prefixes     = ["10.0.2.0/24"]
 }
 
 resource "azurerm_network_interface" "net-inter" {
-  name                = "project1-network-interface"
-  location            = azurerm_resource_group.p1-rg.location
-  resource_group_name = azurerm_resource_group.p1-rg.name
+  name                = "project2-network-interface"
+  location            = azurerm_resource_group.p2-rg.location
+  resource_group_name = azurerm_resource_group.p2-rg.name
 
   ip_configuration {
     name                          = "internal"
@@ -39,8 +39,8 @@ data "azurerm_image" "customngnix" {
 
 resource "azurerm_linux_virtual_machine" "vm" {
   name                = "mk2"
-  resource_group_name = azurerm_resource_group.p1-rg.name
-  location            = azurerm_resource_group.p1-rg.location
+  resource_group_name = azurerm_resource_group.p2-rg.name
+  location            = azurerm_resource_group.p2-rg.location
   size                = "Standard_F2"
   admin_username      = "adminuser"
   network_interface_ids = [
