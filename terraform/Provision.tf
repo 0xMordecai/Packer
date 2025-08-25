@@ -16,6 +16,17 @@ resource "azurerm_subnet" "sub-net" {
   virtual_network_name = azurerm_virtual_network.p2-vnet.name
   address_prefixes     = ["10.0.2.0/24"]
 }
+#---------------------
+# Public IP
+#---------------------
+resource "azurerm_public_ip" "pip" {
+  name = "p2-pip"
+  location = azurerm_resource_group.p2-rg.location
+  resource_group_name = azurerm_resource_group.p2-rg.name
+  allocation_method = "Static"
+  sku = "Standard"
+
+}
 
 resource "azurerm_network_interface" "net-inter" {
   name                = "project2-network-interface"
