@@ -1,5 +1,3 @@
-Here’s your text properly formatted in **Markdown**:
-
 ````markdown
 # Using Platform and Custom Images in Azure with Terraform
 
