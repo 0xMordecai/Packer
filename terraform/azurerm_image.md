@@ -1,4 +1,4 @@
-````markdown
+
 # Using Platform and Custom Images in Azure with Terraform
 
 ## 1. Using a Platform Image
@@ -18,10 +18,7 @@ resource "azurerm_linux_virtual_machine" "example" {
 
   // ... other configurations ...
 }
-````
-
----
-
+```
 ## 2. Using a Custom Image
 
 If you are using a custom image, you would reference its ID using `source_image_id`.
@@ -41,8 +38,6 @@ resource "azurerm_windows_virtual_machine" "example" {
   // ... other configurations ...
 }
 ```
-
----
 
 ## 🔑 Key Considerations
 
