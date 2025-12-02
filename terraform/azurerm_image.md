@@ -5,7 +5,7 @@
 For platform images, you specify the image by its **publisher**, **offer**, **sku**, and **version**.  
 The version can often be set to `"latest"` to automatically use the most recent version available.
 
-```hcl
+```yaml
 resource "azurerm_linux_virtual_machine" "example" {
   // ... other configurations ...
 
@@ -31,7 +31,7 @@ This ID could refer to:
 * a **Shared Image Gallery Image**
 * a **Shared Image Gallery Image Version**
 
-```hcl
+```yaml
 resource "azurerm_windows_virtual_machine" "example" {
   // ... other configurations ...
 
